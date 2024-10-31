@@ -1,2 +1,7 @@
+.venv
 .idea
 *.xz
+
+__pycache__
+upload.sh
+sdks

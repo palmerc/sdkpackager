@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 
 import argparse
-import os
 import tarfile
 
-from path_chdir import Chdir
-from xcode import Xcode
+from packager.path_chdir import Chdir
+from packager.xcode import Xcode
 
 
 def package_platforms(requested_platforms):
@@ -52,3 +51,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+

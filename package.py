@@ -17,10 +17,10 @@ def package_platforms(requested_platforms):
     print(f'Requested platforms: {", ".join(requested_platforms)}')
     available = Xcode.available_platforms()
     missing = set(requested_platforms) - set(available)
-    package_platforms = list(set(available) - missing)
+    package_platforms = list(set(requested_platforms) - missing)
     package_platforms.sort()
 
-    with tarfile.open(output_file, mode='w:gz') as t:
+    with tarfile.open(output_file, mode='w:xz') as t:
         for p in package_platforms:
             print(f'Packaging platform: {Xcode.platform_short_name(p)}, version: {Xcode.platform_version(p)}')
             with Chdir(Xcode.platforms_path()):
@@ -37,8 +37,9 @@ def main():
     available_platforms = Xcode.available_platforms()
 
     parser = argparse.ArgumentParser(description='Package the Xcode SDKs')
-    parser.add_argument('--platforms', nargs='+', choices=available_platforms, required=False,
+    parser.add_argument('--platform', action='append', dest='platforms',
                         help='Specify the SDKs to package, otherwise package all available SDKs')
+    parser.add_argument('xip', metavar='XIP', help='Path to the Xcode xip archive')
 
     args = parser.parse_args()
     if args.platforms:

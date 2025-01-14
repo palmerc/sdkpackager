@@ -9,7 +9,7 @@ from packager.xcode import Xcode
 
 def package_platforms(requested_platforms):
     version = Xcode.version()
-    output_file = f'AppleSDK_Xcode{version}.tgz'
+    output_file = f'AppleSDK_Xcode{version}.xz'
 
     print(f'Xcode {version}')
 
